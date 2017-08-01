@@ -54,10 +54,10 @@ namespace Sivir
 
         public void OnTick()
         {
-            target = GetBestEnemyHeroTargetInRange(1500);
-
             if (GlobalKeys.ComboKey.Active)
             {
+                target = GetBestEnemyHeroTargetInRange(1500);
+                Console.WriteLine("Ik ben dik");
                 Combo();
             }
 
