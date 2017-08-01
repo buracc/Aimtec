@@ -22,9 +22,9 @@ namespace Sivir
     {
         public Sivir()
         {
+            InitMethods();
             InitMenus();
             InitSpells();
-            InitMethods();
         }
 
 
