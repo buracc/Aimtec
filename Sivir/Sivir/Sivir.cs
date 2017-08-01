@@ -77,13 +77,13 @@ namespace Sivir
             }
         }
 
-        public void OnDraws()
-        {
-            if (Player.IsDead)
-            {
-                return;
-            }
-            InitDrawings();
-        }
+        //public void OnDraws()
+        //{
+        //    if (Player.IsDead)
+        //    {
+        //        return;
+        //    }
+        //    InitDrawings();
+        //}
     }
 }

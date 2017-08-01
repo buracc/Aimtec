@@ -6,7 +6,7 @@ namespace Sivir
     {
         public void InitMethods()
         {
-            Render.OnPresent += OnDraws;
+            //Render.OnPresent += OnDraws;
             Game.OnUpdate += OnTick;
         }
     }
