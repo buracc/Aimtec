@@ -22,6 +22,7 @@ namespace Sivir
     {
         public Sivir()
         {
+            Game.OnUpdate += OnTick;
             this.InitMethods();
             this.InitMenus();
             this.InitSpells();
