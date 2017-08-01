@@ -31,7 +31,7 @@ namespace Sivir
 
             if (useQ)
             {
-                CastQ(target);
+                Q.Cast(target);
             }
         }
     }
