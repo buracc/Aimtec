@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Aimtec;
+﻿using Aimtec;
 using Aimtec.SDK.Prediction.Skillshots;
 using Spell = Aimtec.SDK.Spell;
 

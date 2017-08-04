@@ -22,7 +22,6 @@ namespace Sivir
             {
                 ComboMenu.Add(new MenuBool("useq", "Use Q"));
                 ComboMenu.Add(new MenuBool("usew", "Use W to cancel AA"));
-                ComboMenu.Add(new MenuSeperator("na", "E not implemented yet."));
             }
 
             Menu.Add(ComboMenu);

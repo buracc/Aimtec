@@ -26,13 +26,9 @@ namespace Sivir
 
         public void Combo()
         {
-            bool useQ = Menu["combo"]["useq"].As<MenuBool>().Enabled;
-            bool useW = Menu["combo"]["usew"].As<MenuBool>().Enabled;
-
-            if (useQ)
-            {
-                CastQ(target);
-            }
+            
         }
+
+        
     }
 }
