@@ -26,7 +26,7 @@ namespace Sivir
             {
                  case OrbwalkingMode.Combo:
                      target = TargetSelector.GetTarget(1500);
-                     if (target != null && target.IsValidTarget(1500))
+                     if (target != null && target.IsValidTarget())
                      {
                          Q.Cast(target);
                      }
