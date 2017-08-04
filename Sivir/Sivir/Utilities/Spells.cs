@@ -11,10 +11,10 @@ namespace Sivir
 
         public void InitSpells()
         {
-            Spell Q = new Spell(SpellSlot.Q, 1200f);
-            Spell W = new Spell(SpellSlot.W);
-            Spell E = new Spell(SpellSlot.E);
-            Spell R = new Spell(SpellSlot.R);
+            Q = new Spell(SpellSlot.Q, 1200f);
+            W = new Spell(SpellSlot.W);
+            E = new Spell(SpellSlot.E);
+            R = new Spell(SpellSlot.R);
 
             Q.SetSkillshot(0.25f, 90f, 1200f, false, SkillshotType.Line);
 
