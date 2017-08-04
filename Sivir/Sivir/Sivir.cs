@@ -1,5 +1,6 @@
 ﻿using Aimtec.SDK.Extensions;
 using Aimtec.SDK.Menu.Config;
+using Aimtec.SDK.Orbwalking;
 using Aimtec.SDK.TargetSelector;
 
 namespace Sivir
@@ -21,14 +22,17 @@ namespace Sivir
                 return;
             }
 
-            if (GlobalKeys.ComboKey.Active)
+            switch (Orbwalker.Implementation.Mode)
             {
-                target = TargetSelector.GetTarget(1500);
-                if (target != null && target.IsValidTarget(1500))
-                {
-                    Q.Cast(target);
-                }
+                 case OrbwalkingMode.Combo:
+                     target = TargetSelector.GetTarget(1500);
+                     if (target != null && target.IsValidTarget(1500))
+                     {
+                         Q.Cast(target);
+                     }
+                     break;
             }
+            
         }
     }
 }

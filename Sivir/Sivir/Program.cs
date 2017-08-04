@@ -1,9 +1,11 @@
 ﻿using System;
-using Aimtec;
-using Aimtec.SDK.Events;
+
 
 namespace Sivir
 {
+    using Aimtec;
+    using Aimtec.SDK.Events;
+
     class Program
     {
         static void Main(string[] args)

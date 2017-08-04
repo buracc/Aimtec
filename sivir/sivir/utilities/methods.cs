@@ -1,13 +1,12 @@
-﻿using System;
-using Aimtec;
+﻿using Aimtec;
+
 namespace Sivir
 {
     internal partial class Sivir
     {
         public void InitMethods()
         {
-            //Render.OnPresent += OnDraws;
-            //Game.OnUpdate += OnTick;
+            Game.OnUpdate += Game_OnUpdate;
         }
     }
 }
