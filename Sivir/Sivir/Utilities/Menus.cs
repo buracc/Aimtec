@@ -51,7 +51,7 @@ namespace Sivir
 
             var EMenu = new Menu("e", "E");
             {
-                EMenu.Add(new MenuSeperator("soontm", "Will be made by Laura"));
+                EMenu.Add(new MenuSeperator("soontm", "SoonTM - Use ZZephyr and/or Eluder"));
             }
             Menu.Add(EMenu);
 
@@ -74,8 +74,8 @@ namespace Sivir
             }
             Menu.Add(DrawMenu);
             
-            Menu.Add(new MenuSeperator("text1", "Use Eluder/ZZephyr for spellshield usage."));
             Menu.Add(new MenuSeperator("text2", "Use R manually for best results."));
+            Menu.Add(new MenuSeperator("text3", "Made by Burak"));
 
             Menu.Attach();
 
