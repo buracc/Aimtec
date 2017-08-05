@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Aimtec.SDK.Menu;
+﻿using Aimtec.SDK.Menu;
 using Aimtec.SDK.Menu.Components;
 using Aimtec.SDK.Orbwalking;
 
@@ -21,23 +16,23 @@ namespace Sivir
             var ComboMenu = new Menu("combo", "Combo");
             {
                 ComboMenu.Add(new MenuBool("useq", "Use Q in combo"));
-                ComboMenu.Add(new MenuBool("usew", "Use W to AA cancel"));
+                ComboMenu.Add(new MenuBool("usew", "AA cancel with W in combo"));
             }
 
             Menu.Add(ComboMenu);
 
             var HarassMenu = new Menu("harass", "Harass");
             {
-                HarassMenu.Add(new MenuBool("useq", "Use Q to harass"));
-                HarassMenu.Add(new MenuBool("usew", "Use W to harass"));
+                HarassMenu.Add(new MenuBool("useq", "Harass with Q"));
+                HarassMenu.Add(new MenuBool("usew", "Harass with W"));
             }
 
             Menu.Add(HarassMenu);
 
             var LaneClear = new Menu("lane", "Lane clear");
             {
-                LaneClear.Add(new MenuBool("useq", "Use Q to lane clear"));
-                LaneClear.Add(new MenuBool("usew", "Use W to lane clear"));
+                LaneClear.Add(new MenuBool("useq", "Lane clear with Q"));
+                LaneClear.Add(new MenuBool("usew", "Lane clear with W"));
             }
             Menu.Add(LaneClear);
 
@@ -59,10 +54,11 @@ namespace Sivir
                 DrawMenu.Add(new MenuBool("drawq", "Draw Q range"));
             }
             Menu.Add(DrawMenu);
+
             Menu.Add(new MenuSeperator("text1", "Use Eluder for spellshield usage."));
             Menu.Add(new MenuSeperator("text2", "Use R manually for best results."));
-            Menu.Attach();
 
+            Menu.Attach();
 
         }
     }

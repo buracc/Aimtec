@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Damage;
 using Aimtec.SDK.Extensions;
-using Aimtec.SDK.Menu.Components;
 using Aimtec.SDK.Util.Cache;
 
 namespace Sivir
@@ -42,7 +36,7 @@ namespace Sivir
             bool useQ = Menu["harass"]["useq"].Enabled;
             bool useW = Menu["harass"]["usew"].Enabled;
 
-            if(target != null)
+            if (target != null)
             {
                 if (Q.Ready && useQ)
                 {
@@ -110,14 +104,10 @@ namespace Sivir
                 {
                     if (target.HasBuffOfType(BuffType.Snare | BuffType.Stun))
                     {
-                        //check for special debuffs like malz R
                         CastQ(target);
                     }
                 }
             }
-            
         }
-
-        
     }
 }   

@@ -12,6 +12,7 @@ namespace Sivir
         {
             GameEvents.GameStart += OnLoad;
         }
+
         private static void OnLoad()
         {
             if (ObjectManager.GetLocalPlayer().ChampionName == "Sivir")

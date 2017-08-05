@@ -1,8 +1,4 @@
-﻿using System;
-using Aimtec.SDK.Extensions;
-using Aimtec.SDK.Menu.Config;
-using Aimtec.SDK.Orbwalking;
-using Aimtec.SDK.TargetSelector;
+﻿using Aimtec.SDK.Orbwalking;
 
 namespace Sivir
 {
