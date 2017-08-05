@@ -27,14 +27,14 @@ namespace Sivir
                 case OrbwalkingMode.Mixed:
                     Harass();
                     break;
-                case OrbwalkingMode.Lasthit:
+                /*case OrbwalkingMode.Lasthit:
                     LastHit();
-                    break;
+                    break;*/
                 case OrbwalkingMode.Laneclear:
                     LaneClear();
                     break;
             }
-            Misc();
+            AutoQ();
         }
 
         private void OnDrawings()

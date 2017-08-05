@@ -18,6 +18,19 @@ namespace Sivir
             }
         }
 
+        public void CastQSlow(Obj_AI_Base unit)
+        {
+            if (!Q.Ready || Player.Mana < Player.SpellBook.GetSpell(SpellSlot.Q).Cost)
+            {
+                return;
+            }
+
+            if (Player.Distance(unit) < Q.Range - 100)
+            {
+                Q.Cast(unit);
+            }
+        }
+
         public void CastW(Obj_AI_Base unit)
         {
             if (!W.Ready || Player.Mana < Player.SpellBook.GetSpell(SpellSlot.W).Cost)

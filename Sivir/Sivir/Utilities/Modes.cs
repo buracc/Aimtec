@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Damage;
 using Aimtec.SDK.Extensions;
+using Aimtec.SDK.Menu.Components;
 using Aimtec.SDK.Util.Cache;
 
 namespace Sivir
@@ -11,12 +13,13 @@ namespace Sivir
         
         public void LaneClear()
         {
-            bool useQ = Menu["lane"]["useq"].Enabled;
-            bool useW = Menu["lane"]["usew"].Enabled;
+            bool useQ = Menu["q"]["laneq"].Enabled;
+            bool useW = Menu["w"]["lanew"].Enabled;
+            bool spells = Menu["misc"]["spells"].Enabled;
 
             foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Q.Range)))
             {
-                if (minion != null)
+                if (minion != null && spells)
                 {
                     if (Q.Ready && useQ)
                     {
@@ -33,8 +36,15 @@ namespace Sivir
 
         public void Harass()
         {
-            bool useQ = Menu["harass"]["useq"].Enabled;
-            bool useW = Menu["harass"]["usew"].Enabled;
+            target = GetBestEnemyHeroTargetInRange(1500);
+
+            if (target == null)
+            {
+                return;
+            }
+
+            bool useQ = Menu["q"]["haraq"].Enabled;
+            bool useW = Menu["w"]["haraw"].Enabled;
 
             if (target != null)
             {
@@ -48,29 +58,35 @@ namespace Sivir
                     CastW(target);
                 }
             }
-        }
-
-        public void Combo()
-        {
-            bool useQ = Menu["combo"]["useq"].Enabled;
-            bool useW = Menu["combo"]["usew"].Enabled;
-
-            if (target != null)
-            {
-                if (Q.Ready && useQ)
-                {
-                    CastQ(target);
-                }
-
-                if (W.Ready && useW)
-                {
-                    CastW(target);
-                }
-            }
-            
         }
         
-        public void LastHit()
+        public void Combo()
+        {
+            target = GetBestEnemyHeroTargetInRange(1500);
+
+            if (target == null)
+            {
+                return;
+            }
+
+            bool useQ = Menu["q"]["comboq"].Enabled;
+            bool useW = Menu["w"]["combow"].Enabled;
+
+            if (target != null)
+            {
+                if (Q.Ready && useQ)
+                {
+                    CastQ(target);
+                }
+
+                if (W.Ready && useW)
+                {
+                    CastW(target);
+                }
+            }
+        }
+
+        /*public void LastHit()
         {
             bool useW = Menu["last"]["usew"].Enabled;
 
@@ -85,12 +101,21 @@ namespace Sivir
                     }
                 }
             }
-        }
+        }*/
 
-        public void Misc()
+        public void AutoQ()
         {
-            bool ksQ = Menu["misc"]["qks"].Enabled;
-            bool ccQ = Menu["misc"]["qcc"].Enabled;
+            target = GetBestEnemyHeroTargetInRange(1500);
+            
+            if (target == null)
+            {
+                return;
+            }
+
+            bool ksQ = Menu["q"]["qks"].Enabled;
+            bool ccQ = Menu["q"]["qcc"].Enabled;
+            bool slowQ = Menu["q"]["qslow"].Enabled;
+            bool wlQ = Menu["qwl"][target.ChampionName.ToLower()].Enabled;
             
             if (target != null)
             {
@@ -100,11 +125,19 @@ namespace Sivir
                     CastQ(target);
                 }
 
-                if (Q.Ready && ccQ)
+                if (Q.Ready && ccQ && wlQ)
                 {
-                    if (target.HasBuffOfType(BuffType.Snare | BuffType.Stun))
+                    if (target.HasBuffOfType(BuffType.Snare) || target.HasBuffOfType(BuffType.Stun))
                     {
                         CastQ(target);
+                    }
+                }
+
+                if (Q.Ready && slowQ && wlQ)
+                {
+                    if (target.HasBuffOfType(BuffType.Slow))
+                    {
+                        CastQSlow(target);
                     }
                 }
             }
