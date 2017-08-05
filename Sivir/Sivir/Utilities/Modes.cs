@@ -42,14 +42,17 @@ namespace Sivir
             bool useQ = Menu["harass"]["useq"].Enabled;
             bool useW = Menu["harass"]["usew"].Enabled;
 
-            if (Q.Ready && useQ)
+            if(target != null)
             {
-                CastQ(target);
-            }
+                if (Q.Ready && useQ)
+                {
+                    CastQ(target);
+                }
 
-            if (W.Ready && useW)
-            {
-                CastW(target);
+                if (W.Ready && useW)
+                {
+                    CastW(target);
+                }
             }
         }
 
@@ -58,15 +61,19 @@ namespace Sivir
             bool useQ = Menu["combo"]["useq"].Enabled;
             bool useW = Menu["combo"]["usew"].Enabled;
 
-            if (Q.Ready && useQ)
+            if (target != null)
             {
-                CastQ(target);
-            }
+                if (Q.Ready && useQ)
+                {
+                    CastQ(target);
+                }
 
-            if (W.Ready && useW)
-            {
-                CastW(target);
+                if (W.Ready && useW)
+                {
+                    CastW(target);
+                }
             }
+            
         }
         
         public void LastHit()
@@ -86,15 +93,31 @@ namespace Sivir
             }
         }
 
-        public void KillSteal()
+        public void Misc()
         {
-            bool useQ = Menu["ks"]["useq"].Enabled;
-            double dmg = Player.GetSpellDamage(target, SpellSlot.Q);
-
-            if (Q.Ready && useQ && target.Health <= dmg)
+            bool ksQ = Menu["misc"]["qks"].Enabled;
+            bool ccQ = Menu["misc"]["qcc"].Enabled;
+            
+            if (target != null)
             {
-                CastQ(target);
+                double dmg = Player.GetSpellDamage(target, SpellSlot.Q);
+                if (Q.Ready && ksQ && target.Health <= dmg)
+                {
+                    CastQ(target);
+                }
+
+                if (Q.Ready && ccQ)
+                {
+                    if (target.HasBuffOfType(BuffType.Snare | BuffType.Stun))
+                    {
+                        //check for special debuffs like malz R
+                        CastQ(target);
+                    }
+                }
             }
+            
         }
+
+        
     }
 }   

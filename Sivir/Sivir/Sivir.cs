@@ -38,7 +38,7 @@ namespace Sivir
                     LaneClear();
                     break;
             }
-            KillSteal();
+            Misc();
         }
 
         private void OnDrawings()

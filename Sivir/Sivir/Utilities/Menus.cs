@@ -46,11 +46,12 @@ namespace Sivir
                 LastHit.Add(new MenuBool("usew", "Use W to last hit"));
             }
 
-            var KillSteal = new Menu("ks", "Kill steal");
+            var Misc = new Menu("misc", "Misc.");
             {
-                KillSteal.Add(new MenuBool("useq", "Auto Q if killable enemy in range"));
+                Misc.Add(new MenuBool("qks", "Auto Q if killable enemy in range"));
+                Misc.Add(new MenuBool("qcc", "Auto Q if enemy immobile"));
             }
-            Menu.Add(KillSteal);
+            Menu.Add(Misc);
 
             Menu.Add(LastHit);
             var DrawMenu = new Menu("drawings", "Drawings");
