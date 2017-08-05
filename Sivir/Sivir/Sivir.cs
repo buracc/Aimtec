@@ -1,4 +1,5 @@
-﻿using Aimtec.SDK.Extensions;
+﻿using System;
+using Aimtec.SDK.Extensions;
 using Aimtec.SDK.Menu.Config;
 using Aimtec.SDK.Orbwalking;
 using Aimtec.SDK.TargetSelector;
@@ -9,9 +10,9 @@ namespace Sivir
     {
         public Sivir()
         {
-            this.InitMethods();
-            this.InitSpells();
-            this.InitMenus();
+            InitMethods();
+            InitSpells();
+            InitMenus();
         }
         
         private void Game_OnUpdate()
@@ -24,15 +25,29 @@ namespace Sivir
 
             switch (Orbwalker.Implementation.Mode)
             {
-                 case OrbwalkingMode.Combo:
-                     
-                     if (target != null && target.IsValidTarget())
-                     {
-                         Q.Cast(target);
-                     }
-                     break;
+                case OrbwalkingMode.Combo:
+                    Combo();
+                    break;
+                case OrbwalkingMode.Mixed:
+                    Harass();
+                    break;
+                case OrbwalkingMode.Lasthit:
+                    LastHit();
+                    break;
+                case OrbwalkingMode.Laneclear:
+                    LaneClear();
+                    break;
             }
-            
+            KillSteal();
+        }
+
+        private void OnDrawings()
+        {
+            if (Player.IsDead)
+            {
+                return;
+            }
+            InitDrawings();
         }
     }
 }

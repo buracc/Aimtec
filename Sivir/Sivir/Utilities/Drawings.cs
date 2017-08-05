@@ -14,7 +14,10 @@ namespace Sivir
     {
         public void InitDrawings()
         {
-            //todo
+            if (Menu["drawings"]["drawq"].Enabled && Q.Ready)
+            {
+                Render.Circle(Player.Position, Q.Range, 50, Color.Chartreuse);
+            }
         }
     }
 }

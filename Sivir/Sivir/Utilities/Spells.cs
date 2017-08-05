@@ -12,7 +12,7 @@ namespace Sivir
         public void InitSpells()
         {
             Q = new Spell(SpellSlot.Q, 1200f);
-            W = new Spell(SpellSlot.W);
+            W = new Spell(SpellSlot.W, Player.AttackRange + Player.BoundingRadius);
             E = new Spell(SpellSlot.E);
             R = new Spell(SpellSlot.R);
 
