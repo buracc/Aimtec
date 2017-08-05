@@ -24,8 +24,7 @@ namespace Sivir
                 return target;
             }
 
-            var firstTarget = ts.GetOrderedTargets(range)
-                .FirstOrDefault(t => t.IsValidTarget());
+            var firstTarget = ts.GetOrderedTargets(range).FirstOrDefault(t => t.IsValidTarget());
             if (firstTarget != null)
             {
                 return firstTarget;

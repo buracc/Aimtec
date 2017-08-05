@@ -13,7 +13,6 @@ namespace Sivir
         
         private void Game_OnUpdate()
         {
-
             if (Player.IsDead)
             {
                 return;

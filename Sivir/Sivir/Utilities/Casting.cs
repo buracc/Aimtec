@@ -25,7 +25,7 @@ namespace Sivir
                 return;
             }
 
-            if (Player.Distance(unit) < Q.Range - 100)
+            if (Player.Distance(unit) <= Q.Range - 100)
             {
                 Q.Cast(unit);
             }

@@ -9,7 +9,7 @@ namespace Sivir
         public void InitDrawings()
         {
             Vector2 a;
-            var heropos = Render.WorldToScreen(Player.Position, out a);
+            var pos = Render.WorldToScreen(Player.Position, out a);
             var xaOffset = (int)a.X;
             var yaOffset = (int)a.Y;
 
