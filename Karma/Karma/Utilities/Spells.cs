@@ -13,9 +13,9 @@ namespace Karma
             Q = new Spell(SpellSlot.Q, 950f);
             W = new Spell(SpellSlot.W, 675f);
             E = new Spell(SpellSlot.E, 800f);
-            R = new Spell(SpellSlot.R);
+            R = new Spell(SpellSlot.R, 0);
 
-            Q.SetSkillshot(0.25f, 90f, 950f, false, SkillshotType.Line);
+            Q.SetSkillshot(0.25f, 90f, 950f, true, SkillshotType.Line);
         }
     }
 }

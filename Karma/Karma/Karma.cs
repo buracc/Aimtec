@@ -31,6 +31,7 @@ namespace Karma
                     break;
             }
             AutoQ();
+            ManualE();
         }
 
         public void OnDrawings()

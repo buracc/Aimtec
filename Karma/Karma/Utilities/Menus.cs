@@ -51,9 +51,7 @@ namespace Karma
             var EMenu = new Menu("e", "E");
             {
                 EMenu.Add(new MenuSeperator("agre", "Aggressive E settings: "));
-                EMenu.Add(new MenuList("ew", "Use E before/after W", new[] {"Before", "After"}, 0));
-                EMenu.Add(new MenuBool("combe", "Use with W in combo"));
-                EMenu.Add(new MenuBool("haraw", "Use with W to harass"));
+                EMenu.Add(new MenuSliderBool("smarte", "Cast E if target range >= x", true, 700, 100, 900));
 
                 EMenu.Add(new MenuSeperator("defe", "Defensive E settings:"));
                 EMenu.Add(new MenuSeperator("soontm", "Defensive shield logic SoonTM"));
@@ -65,12 +63,13 @@ namespace Karma
                 RMenu.Add(new MenuBool("combrq", "Empower Q in combo"));
                 RMenu.Add(new MenuBool("hararq", "Empower Q to harass"));
                 RMenu.Add(new MenuSliderBool("combrw", "Empower W if HP lower than", true, 30, 10, 100));
-                RMenu.Add(new MenuKeyBind("combrw", "Empower E on self", KeyCode.A, KeybindType.Press));
             }
+            Menu.Add(RMenu);
 
             var MiscMenu = new Menu("misc", "Misc");
             {
                 MiscMenu.Add(new MenuKeyBind("spells", "Spells farm toggle", KeyCode.M, KeybindType.Toggle));
+                MiscMenu.Add(new MenuKeyBind("eself", "Empower E on self", KeyCode.A, KeybindType.Press));
             }
             Menu.Add(MiscMenu);
             
