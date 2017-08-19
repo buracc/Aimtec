@@ -10,12 +10,12 @@ namespace Karma
 
         public void InitSpells()
         {
-            Q = new Spell(SpellSlot.Q, 950f);
-            W = new Spell(SpellSlot.W, 675f);
-            E = new Spell(SpellSlot.E, 800f);
+            Q = new Spell(SpellSlot.Q, 950);
+            W = new Spell(SpellSlot.W, 675);
+            E = new Spell(SpellSlot.E, 800);
             R = new Spell(SpellSlot.R, 0);
 
-            Q.SetSkillshot(0.25f, 90f, 950f, true, SkillshotType.Line);
+            Q.SetSkillshot(0.25f, 60, 1700, true, SkillshotType.Line);
         }
     }
 }

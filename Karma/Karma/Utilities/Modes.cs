@@ -47,7 +47,7 @@ namespace Karma
 
             if (target != null)
             {
-                if (useRW && Player.HealthPercent() <= wHP)
+                if (useRW && Player.HealthPercent() <= wHP && Player.Distance(target) <= W.Range)
                 {
                     CastR();
                     if (Player.HasBuff("KarmaMantra") && W.Ready)
@@ -70,15 +70,18 @@ namespace Karma
 
                 if (Q.Ready && useQ)
                 {
-                    if (useRQ)
+                    if (Player.Distance(target) <= Q.Range)
                     {
-                        CastR();
-                        if (Player.HasBuff("KarmaMantra") && Q.Ready)
+                        if (useRQ)
                         {
-                            CastQ(target);
+                            CastR();
+                            if (Player.HasBuff("KarmaMantra") && Q.Ready)
+                            {
+                                CastQ(target);
+                            }
                         }
+                        CastQ(target);
                     }
-                    CastQ(target);
                 }
             }
         }
@@ -103,7 +106,7 @@ namespace Karma
 
             if (target != null)
             {
-                if (useRW && Player.HealthPercent() <= wHP)
+                if (useRW && Player.HealthPercent() <= wHP && Player.Distance(target) <= W.Range)
                 {
                     CastR();
                     if (Player.HasBuff("KarmaMantra") && W.Ready)
@@ -112,7 +115,7 @@ namespace Karma
                     }
                 }
 
-                if (W.Ready && useW && !Player.HasBuff("KarmaMantra"))
+                else if (!Q.Ready && W.Ready && useW && !Player.HasBuff("KarmaMantra"))
                 {
                     CastW(target);
                     if (E.Ready && smartE)
@@ -126,15 +129,18 @@ namespace Karma
 
                 if (Q.Ready && useQ)
                 {
-                    if (useRQ)
+                    if (Player.Distance(target) <= Q.Range)
                     {
-                        CastR();
-                        if (Player.HasBuff("KarmaMantra") && Q.Ready)
+                        if (useRQ)
                         {
-                            CastQ(target);
+                            CastR();
+                            if (Player.HasBuff("KarmaMantra") && Q.Ready)
+                            {
+                                CastQ(target);
+                            }
                         }
+                        CastQ(target);
                     }
-                    CastQ(target);
                 }
             }
         }
