@@ -86,7 +86,6 @@ namespace Karma
             }
         }
 
-
         public void Combo()
         {
             target = GetBestEnemyHeroTargetInRange(1500);
