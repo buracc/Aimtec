@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Extensions;
 using Aimtec.SDK.TargetSelector;
+using Aimtec.SDK.Util.Cache;
 
 namespace Template
 {
@@ -33,5 +35,20 @@ namespace Template
             return null;
         }
 
+        public static List<Obj_AI_Minion> GetEnemyLaneMinionsTargets()
+        {
+            return GetEnemyLaneMinionsTargetsInRange(float.MaxValue);
+        }
+
+        public static List<Obj_AI_Minion> GetEnemyLaneMinionsTargetsInRange(float range)
+        {
+            return GameObjects.EnemyMinions.Where(m => m.IsValidTarget(range)).ToList();
+        }
+
+        public static int CountMinionsInRange(float Range)
+        {
+            return GameObjects.EnemyMinions.Count(
+                minion => minion.IsValidTarget(Range));
+        }
     }
 }

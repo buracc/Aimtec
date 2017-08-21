@@ -35,18 +35,18 @@ namespace Template
             }
             Menu.Add(EMenu);
 
+            var RMenu = new Menu("r", "R");
+            {
+
+            }
+            Menu.Add(RMenu);
+
             var MiscMenu = new Menu("misc", "Misc");
             {
                 MiscMenu.Add(new MenuKeyBind("spells", "Spells farm toggle", KeyCode.M, KeybindType.Toggle));
             }
             Menu.Add(MiscMenu);
-
-            var LastHit = new Menu("last", "Last hitting");
-            {
-
-            }
-            Menu.Add(LastHit);
-
+            
             var DrawMenu = new Menu("drawings", "Drawings");
             {
                 DrawMenu.Add(new MenuBool("draws", "Display spell farm status"));

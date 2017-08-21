@@ -13,7 +13,7 @@ namespace Template
         {
             bool spells = Menu["misc"]["spells"].Enabled;
 
-            foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Q.Range)))
+            foreach (var minion in GetEnemyLaneMinionsTargetsInRange(1500))
             {
                 if (minion != null && spells)
                 {
@@ -46,7 +46,15 @@ namespace Template
 
         public void LastHit()
         {
-            
+            bool spells = Menu["misc"]["spells"].Enabled;
+
+            foreach (var minion in GetEnemyLaneMinionsTargetsInRange(1500))
+            {
+                if (minion != null && spells)
+                {
+
+                }
+            }
         }
        
     }
