@@ -9,6 +9,7 @@ namespace Karthus
 {
     internal partial class Karthus
     {
+        //Methods leeched from Kornis, thx Kornis <333
         public static Obj_AI_Hero Player => ObjectManager.GetLocalPlayer();
         public Obj_AI_Hero target;
 

@@ -9,6 +9,7 @@ namespace Template
 {
     internal partial class Template
     {
+        //Methods leeched form Kornis, thx Kornis <33
         public static Obj_AI_Hero Player => ObjectManager.GetLocalPlayer();
         public Obj_AI_Hero target;
 

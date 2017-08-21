@@ -7,6 +7,7 @@ namespace Sivir
 {
     internal partial class Sivir
     {
+        //Methods leeched from Kornis, thx Kornis <33
         public static Obj_AI_Hero Player => ObjectManager.GetLocalPlayer();
         public Obj_AI_Hero target;
 
