@@ -27,7 +27,33 @@ namespace Karthus
 
             if (Player.Distance(unit) < W.Range)
             {
-                W.Cast();
+                W.Cast(unit);
+            }
+        }
+
+        public void CastE(Obj_AI_Base unit)
+        {
+            if (!E.Ready || Player.Mana < Player.SpellBook.GetSpell(SpellSlot.E).Cost)
+            {
+                return;
+            }
+
+            if (Player.Distance(unit) < E.Range)
+            {
+                E.Cast();
+            }
+        }
+
+        public void CastR(Obj_AI_Base unit)
+        {
+            if (!R.Ready || Player.Mana < Player.SpellBook.GetSpell(SpellSlot.R).Cost)
+            {
+                return;
+            }
+
+            if (Player.Distance(unit) < R.Range)
+            {
+                R.Cast();
             }
         }
 

@@ -16,7 +16,7 @@ namespace Karthus
         {
             if (ObjectManager.GetLocalPlayer().ChampionName == "Karthus")
             {
-                Console.WriteLine("xx Loaded.");
+                Console.WriteLine("Karthus Loaded.");
                 var Karthus = new Karthus();
             }
         }

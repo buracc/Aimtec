@@ -1,4 +1,8 @@
-﻿using Aimtec.SDK.Orbwalking;
+﻿using System;
+using Aimtec;
+using Aimtec.SDK.Extensions;
+using Aimtec.SDK.Orbwalking;
+using Aimtec.SDK.Util.Cache;
 
 namespace Karthus
 {
@@ -26,18 +30,19 @@ namespace Karthus
                 case OrbwalkingMode.Mixed:
                     Harass();
                     break;
-                /*case OrbwalkingMode.Lasthit:
+                case OrbwalkingMode.Lasthit:
                     LastHit();
-                    break;*/
+                    break;
                 case OrbwalkingMode.Laneclear:
                     LaneClear();
                     break;
             }
+            AutoR();
         }
 
         private void OnDrawings()
         {
-            if (Player.IsDead)
+            if (Player.IsDead && !Player.HasBuff("KarthusDeathDefiedBuff"))
             {
                 return;
             }
