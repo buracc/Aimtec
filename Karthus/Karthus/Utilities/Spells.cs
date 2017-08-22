@@ -16,7 +16,7 @@ namespace Karthus
             E = new Spell(SpellSlot.E, 550f);
             R = new Spell(SpellSlot.R, 10000f);
 
-            Q.SetSkillshot(0.625f, 160f, 1000f, false, SkillshotType.Circle, false, HitChance.None);
+            Q.SetSkillshot(0.625f, 160f, 1000f, false, SkillshotType.Circle, false, HitChance.Medium);
             W.SetSkillshot(0.25f, 100f, 1000f, false, SkillshotType.Circle, false, HitChance.None);
         }
     }
