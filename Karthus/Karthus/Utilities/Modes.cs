@@ -10,8 +10,8 @@ namespace Karthus
 {
     internal partial class Karthus
     {
-        private static string killableTarg;
-        private static bool killableTargBool = false;
+        string killableTarg;
+        bool killableTargBool;
 
         public void LaneClear()
         {
@@ -199,16 +199,9 @@ namespace Karthus
 
         public void AutoR()
         {
-            target = GetBestEnemyHeroTargetInRange(R.Range);
-
-            if (target == null)
-            {
-                return;
-            }
-
             bool useR = Menu["r"]["user"].Enabled;
             bool deadR = Menu["r"]["deadr"].Enabled;
-            double dmg = Player.GetSpellDamage(target, SpellSlot.R) - 50;
+            killableTargBool = false;
 
             if (useR && !deadR)
             {
@@ -220,17 +213,23 @@ namespace Karthus
                             return;
                         }
 
-                        if (R.Ready && target.Health < dmg && Player.Mana > Player.SpellBook.GetSpell(SpellSlot.R).Cost)
+                        foreach (var target in GameObjects.EnemyHeroes.Where(t => t.Health <= Player.GetSpellDamage(t, SpellSlot.R)))
                         {
-                            R.Cast();
+                            if (target.IsValidTarget())
+                            {
+                                R.Cast();
+                            }
                         }
                         break;
 
                     case 1:
-                        if (target.Health < dmg)
+                        foreach (var target in GameObjects.EnemyHeroes.Where(t => t.Health <= Player.GetSpellDamage(t, SpellSlot.R)))
                         {
-                            killableTarg = target.ChampionName;
-                            killableTargBool = true;
+                            if (target.IsValidTarget())
+                            {
+                                killableTargBool = true;
+                                killableTarg = target.ChampionName;
+                            }
                         }
                         break;
                 }
@@ -243,24 +242,30 @@ namespace Karthus
                     switch (Menu["r"]["rmode"].Value)
                     {
                         case 0:
-                            if (!R.Ready || Player.Mana < Player.SpellBook.GetSpell(SpellSlot.R).Cost)
-                            {
-                                return;
-                            }
+                        if (!R.Ready || Player.Mana < Player.SpellBook.GetSpell(SpellSlot.R).Cost)
+                        {
+                            return;
+                        }
 
-                            if (R.Ready && target.Health < dmg && Player.Mana > Player.SpellBook.GetSpell(SpellSlot.R).Cost)
+                        foreach (var target in GameObjects.EnemyHeroes.Where(t => t.Health <= Player.GetSpellDamage(t, SpellSlot.R)))
+                        {
+                            if (target.IsValidTarget())
                             {
                                 R.Cast();
                             }
-                            break;
+                        }
+                        break;
 
-                        case 1:
-                            if (target.Health < dmg)
+                    case 1:
+                        foreach (var target in GameObjects.EnemyHeroes.Where(t => t.Health <= Player.GetSpellDamage(t, SpellSlot.R)))
+                        {
+                            if (target.IsValidTarget())
                             {
-                                killableTarg = target.ChampionName;
                                 killableTargBool = true;
+                                killableTarg = target.ChampionName;
                             }
-                            break;
+                        }
+                        break;
                     }
                 }
             }

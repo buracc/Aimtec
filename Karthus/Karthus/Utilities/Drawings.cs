@@ -44,13 +44,8 @@ namespace Karthus
                     Render.Text(x - 50, y + 50, Color.Orange, on);
                 }
             }
-
-            if (target == null)
-            {
-                return;
-            }
-
-            if (Menu["r"]["rmode"].Value == 1 && killableTargBool && R.Ready && !target.IsDead && target != null)
+            
+            if (Menu["r"]["rmode"].Value == 1 && killableTargBool && R.Ready)
             {
                 Render.Text(x - 50, y - 150, Color.Red, killableTarg + " KILLABLE WITH R");
             }
