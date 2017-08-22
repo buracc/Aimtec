@@ -10,8 +10,9 @@ namespace Karthus
             
             Vector2 a;
             var pos = Render.WorldToScreen(Player.Position, out a);
-            var xaOffset = (int)a.X;
-            var yaOffset = (int)a.Y;
+            var x = (int)a.X;
+            var y = (int)a.Y;
+
 
             if (Menu["drawings"]["drawq"].Enabled)
             {
@@ -36,11 +37,11 @@ namespace Karthus
 
                 if (!Menu["misc"]["spells"].Enabled)
                 {
-                    Render.Text(xaOffset - 50, yaOffset + 50, Color.Orange, off);
+                    Render.Text(x - 50, y + 50, Color.Orange, off);
                 }
                 else
                 {
-                    Render.Text(xaOffset - 50, yaOffset + 50, Color.Orange, on);
+                    Render.Text(x - 50, y + 50, Color.Orange, on);
                 }
             }
 
@@ -51,7 +52,7 @@ namespace Karthus
 
             if (Menu["r"]["rmode"].Value == 1 && killableTargBool && R.Ready && !target.IsDead && target != null)
             {
-                Render.Text(xaOffset - 50, yaOffset - 150, Color.Red, killableTarg + " KILLABLE WITH R");
+                Render.Text(x - 50, y - 150, Color.Red, killableTarg + " KILLABLE WITH R");
             }
         }
     }

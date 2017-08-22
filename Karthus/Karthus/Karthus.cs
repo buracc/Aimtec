@@ -17,7 +17,7 @@ namespace Karthus
 
         private void Game_OnUpdate()
         {
-            if (Player.IsDead)
+            if (Player.IsDead && !Player.HasBuff("KarthusDeathDefiedBuff"))
             {
                 return;
             }
