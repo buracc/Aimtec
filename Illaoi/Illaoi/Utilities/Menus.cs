@@ -20,45 +20,35 @@ namespace Illaoi
             {
                 QMenu.Add(new MenuBool("comboq", "Use Q in combo"));
                 QMenu.Add(new MenuBool("laneq", "Lane clear with Q"));
-                QMenu.Add(new MenuBool("haraq", "Harass with Q"));
-
-                QMenu.Add(new MenuSeperator("sep1", "Auto Q config: "));
-                QMenu.Add(new MenuBool("qks", "Auto Q if killable enemy in range"));
-                QMenu.Add(new MenuBool("qcc", "Auto Q if enemy immobile"));
-                QMenu.Add(new MenuBool("qslow", "Auto Q if enemy slowed"));
-
-                var QWhiteList = new Menu("qwl", "Auto Q on CC whitelist");
-                {
-
-                    foreach (var target in GameObjects.EnemyHeroes)
-                    {
-                        QWhiteList.Add(
-                            new MenuBool(target.ChampionName.ToLower(), "Auto Q: " + target.ChampionName));
-                    }
-                }
-                QMenu.Add(QWhiteList);
+                QMenu.Add(new MenuBool("harassq", "Harass with Q"));
+                
             }
             Menu.Add(QMenu);
 
             WMenu = new Menu("w", "W");
             {
-                WMenu.Add(new MenuBool("combow", "AA cancel with W in combo"));
+                WMenu.Add(new MenuBool("combow", "AA with W in combo"));
                 WMenu.Add(new MenuBool("lanew", "Lane clear with W"));
-                WMenu.Add(new MenuBool("haraw", "Harass with W"));
+                WMenu.Add(new MenuBool("lastw", "Last hit with W"));
+                WMenu.Add(new MenuBool("harassw", "Harass with W"));
             }
             Menu.Add(WMenu);
 
             EMenu = new Menu("e", "E");
             {
                 EMenu.Add(new MenuBool("comboe", "Use E in combo"));
-                EMenu.Add(new MenuSeperator("sep2", "More E logic coming soon"));
+                EMenu.Add(new MenuBool("harasse", "Harass with E"));
+                EMenu.Add(new MenuList("emode", "Spirit attack preference:", new []{"Spirit if enemy out of range", "Always spirit", "Always enemy"}, 0));
             }
             Menu.Add(EMenu);
 
             RMenu = new Menu("r", "R");
             {
                 RMenu.Add(new MenuBool("combor", "Use R in combo"));
-                RMenu.Add(new MenuSliderBool("rcount", "R if >= x enemies", true, 3, 1, 5));
+                RMenu.Add(new MenuBool("blockq", "Block Q usage while ulted"));
+                RMenu.Add(new MenuBool("blocke", "Block E usage while ulted"));
+                RMenu.Add(new MenuSliderBool("rcount", "Only R if >= x enemies", true, 3, 1, 5));
+                RMenu.Add(new MenuBool("addspirit", "Include spirit in champ count?"));
             }
             Menu.Add(RMenu);
 
@@ -77,9 +67,8 @@ namespace Illaoi
                 DrawMenu.Add(new MenuBool("draws", "Display spell farm status"));
             }
             Menu.Add(DrawMenu);
-
-            Menu.Add(new MenuSeperator("sep3", "Work in progress"));
-            Menu.Add(new MenuSeperator("sep4", "Made by Burak"));
+            
+            Menu.Add(new MenuSeperator("sep2", "Made by Burak"));
 
             Menu.Attach();
         }

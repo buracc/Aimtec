@@ -1,12 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Extensions;
 using Aimtec.SDK.TargetSelector;
+using Aimtec.SDK.Util.Cache;
 
 namespace Illaoi
 {
     internal partial class Illaoi
     {
+        //Methods leeched form Kornis, thx Kornis <33
         public static Obj_AI_Hero Player => ObjectManager.GetLocalPlayer();
         public Obj_AI_Hero target;
 
@@ -33,5 +36,20 @@ namespace Illaoi
             return null;
         }
 
+        public static List<Obj_AI_Minion> GetEnemyLaneMinionsTargets()
+        {
+            return GetEnemyLaneMinionsTargetsInRange(float.MaxValue);
+        }
+
+        public static List<Obj_AI_Minion> GetEnemyLaneMinionsTargetsInRange(float range)
+        {
+            return GameObjects.EnemyMinions.Where(m => m.IsValidTarget(range)).ToList();
+        }
+
+        public static int CountMinionsInRange(float Range)
+        {
+            return GameObjects.EnemyMinions.Count(
+                minion => minion.IsValidTarget(Range));
+        }
     }
 }

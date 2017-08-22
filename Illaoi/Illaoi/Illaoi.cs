@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aimtec;
 using Aimtec.SDK.Orbwalking;
+using Aimtec.SDK.Util.Cache;
 
 namespace Illaoi
 {
@@ -40,7 +41,6 @@ namespace Illaoi
                     LaneClear();
                     break;
             }
-            AutoQ();
         }
 
         private void OnDrawings()

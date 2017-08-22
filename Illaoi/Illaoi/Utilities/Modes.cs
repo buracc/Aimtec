@@ -25,38 +25,128 @@ namespace Illaoi
             bool useW = Menu["w"]["combow"].Enabled;
             bool useE = Menu["e"]["comboe"].Enabled;
             bool useR = Menu["r"]["combor"].Enabled;
+            bool blockQ = Menu["r"]["blockq"].Enabled;
+            bool blockE = Menu["r"]["blocke"].Enabled;
             bool countR = Menu["r"]["rcount"].Enabled;
+            bool countSpirit = Menu["r"]["addspirit"].Enabled;
             int minR = Menu["r"]["rcount"].Value;
+
+            bool pulled = false;
+            bool hitSpirit = false;
+            
 
             if (target != null)
             {
-                if (Q.Ready && useQ)
+                foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(Q.Range))
                 {
-                    CastQ(target);
+                    if (spirit.UnitSkinName == target.UnitSkinName)
+                    {
+                        pulled = true;
+                        switch (Menu["e"]["emode"].Value)
+                        {
+                            case 0:
+                                if (Player.Distance(target) > (Q.Range + W.Range) && Player.Distance(spirit) < Q.Range)
+                                {
+                                    hitSpirit = true;
+                                }
+                                break;
+                            case 1:
+                                hitSpirit = true;
+                                break;
+                            case 2:
+                                hitSpirit = false;
+                                break;
+                        }
+                    }
                 }
 
-                if (W.Ready && useW)
-                {
-                    CastW(target);
-                }
-
-                if (E.Ready && useE)
-                {
-                    CastE(target);
-                }
-
-                if (R.Ready && useR && !countR)
+                if (R.Ready && useR && !countR && Player.Distance(target) < R.Range)
                 {
                     CastR(target);
                 }
 
-                if (R.Ready && useR && countR)
+                if (R.Ready && useR && countR && Player.Distance(target) < R.Range)
                 {
+                    if (countSpirit)
+                    {
+                        if (pulled)
+                        {
+                            if (minR >= Player.CountEnemyHeroesInRange(R.Range) + 1)
+                            {
+                                CastR(target);
+                            }
+                        } 
+                    }
+
                     if (minR >= Player.CountEnemyHeroesInRange(R.Range))
                     {
                         CastR(target);
                     }
                 }
+
+                if (E.Ready && useE && Player.Distance(target) < E.Range)
+                {
+                    if (Player.HasBuff("IllaoiR"))
+                    {
+                        if (blockE)
+                        {
+                            return;
+                        }
+                    }
+
+                    if (!Player.HasBuff("IllaoiR"))
+                    {
+                        CastE(target);
+                    }
+                }
+
+                if (W.Ready && useW && Player.Distance(target) < W.Range)
+                {
+                    if (hitSpirit)
+                    {
+                        foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(W.Range))
+                        {
+                            if (spirit.UnitSkinName == target.UnitSkinName)
+                            {
+                                if (Player.Distance(spirit) < W.Range)
+                                {
+                                    CastW(spirit);
+                                }
+                            }
+                        }
+                    }
+                    CastW(target);
+                }
+
+                if (Q.Ready && useQ && Player.Distance(target) < Q.Range)
+                {
+                    if (Player.HasBuff("IllaoiR"))
+                    {
+                        if (blockQ)
+                        {
+                            return;
+                        }
+                    }
+
+                    if (!Player.HasBuff("IllaoiR"))
+                    {
+                        if (hitSpirit)
+                        {
+                            foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(Q.Range))
+                            {
+                                if (spirit.UnitSkinName == target.UnitSkinName)
+                                {
+                                    if (Player.Distance(spirit) < Q.Range)
+                                    {
+                                        CastQ(spirit);
+                                    }
+                                }
+                            }
+                        }
+                        CastQ(target);
+                    }
+                }
+                
             }
         }
 
@@ -69,26 +159,44 @@ namespace Illaoi
                 return;
             }
 
-            bool useQ = Menu["q"]["haraq"].Enabled;
-            bool useW = Menu["w"]["haraw"].Enabled;
+            bool useQ = Menu["q"]["harassq"].Enabled;
+            bool useW = Menu["w"]["harassw"].Enabled;
+            bool useE = Menu["e"]["harasse"].Enabled;
 
             if (target != null)
             {
-                if (Q.Ready && useQ)
+                if (Q.Ready && useQ && Player.Distance(target) < Q.Range)
                 {
                     CastQ(target);
                 }
 
-                if (W.Ready && useW)
+                if (W.Ready && useW && Player.Distance(target) < W.Range)
                 {
                     CastW(target);
+                }
+
+                if (E.Ready && useE && Player.Distance(target) < E.Range)
+                {
+                    CastE(target);
                 }
             }
         }
 
         private void LastHit()
         {
-            //last hit logic
+            bool useW = Menu["w"]["lastw"].Enabled;
+            bool spells = Menu["misc"]["spells"].Enabled;
+
+            foreach (var minion in GetEnemyLaneMinionsTargetsInRange(W.Range))
+            {
+                if (minion != null && spells)
+                {
+                    if (W.Ready && useW && Player.Distance(minion) < W.Range)
+                    {
+                        CastW(minion);
+                    }
+                }
+            }
         }
 
         public void LaneClear()
@@ -97,58 +205,18 @@ namespace Illaoi
             bool useW = Menu["w"]["lanew"].Enabled;
             bool spells = Menu["misc"]["spells"].Enabled;
 
-            foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(Q.Range)))
+            foreach (var minion in GetEnemyLaneMinionsTargetsInRange(Q.Range))
             {
                 if (minion != null && spells)
                 {
-                    if (Q.Ready && useQ)
-                    {
-                        CastQ(minion);
-                    }
-
-                    if (W.Ready && useW)
+                    if (W.Ready && useW && Player.Distance(minion) < W.Range)
                     {
                         CastW(minion);
                     }
-                }
-            }
-        }
 
-        public void AutoQ()
-        {
-            target = GetBestEnemyHeroTargetInRange(1500);
-
-            if (target == null)
-            {
-                return;
-            }
-
-            bool ksQ = Menu["q"]["qks"].Enabled;
-            bool ccQ = Menu["q"]["qcc"].Enabled;
-            bool slowQ = Menu["q"]["qslow"].Enabled;
-            bool wlQ = Menu["qwl"][target.ChampionName.ToLower()].Enabled;
-
-            if (target != null)
-            {
-                double dmg = Player.GetSpellDamage(target, SpellSlot.Q);
-                if (Q.Ready && ksQ && target.Health <= dmg)
-                {
-                    CastQ(target);
-                }
-
-                if (Q.Ready && ccQ && wlQ)
-                {
-                    if (target.HasBuffOfType(BuffType.Snare) || target.HasBuffOfType(BuffType.Stun))
+                    if (Q.Ready && useQ && Player.Distance(minion) < Q.Range)
                     {
-                        CastQ(target);
-                    }
-                }
-
-                if (Q.Ready && slowQ && wlQ)
-                {
-                    if (target.HasBuffOfType(BuffType.Slow))
-                    {
-                        CastQSlow(target);
+                        CastQ(minion);
                     }
                 }
             }
