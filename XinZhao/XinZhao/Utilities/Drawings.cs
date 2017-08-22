@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using Aimtec;
 
-namespace Template
+namespace XinZhao
 {
 
-    internal partial class Template
+    internal partial class XinZhao
     {
         public void InitDrawings()
         {
@@ -12,6 +12,15 @@ namespace Template
             var pos = Render.WorldToScreen(Player.Position, out a);
             var xaOffset = (int)a.X;
             var yaOffset = (int)a.Y;
+
+            if (Menu["drawings"]["drawe"].Enabled)
+            {
+                Render.Circle(Player.Position, E.Range, 50, Color.GreenYellow);
+            }
+            if (Menu["drawings"]["drawr"].Enabled)
+            {
+                Render.Circle(Player.Position, R.Range, 50, Color.Crimson);
+            }
 
             if (Menu["drawings"]["draws"].Enabled)
             {

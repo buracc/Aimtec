@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3794DC64-3662-4CD8-8D8E-C8031B556653}</ProjectGuid>
+    <ProjectGuid>{46073C1F-7FF0-4FE3-9D6C-20ECDD5CA66C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Template</RootNamespace>
-    <AssemblyName>Template</AssemblyName>
+    <RootNamespace>XinZhao</RootNamespace>
+    <AssemblyName>XinZhao</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,10 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aimtec">
-      <HintPath>..\..\..\..\..\AppData\Local\AimtecLoader\Data\System\Aimtec.dll</HintPath>
+      <HintPath>C:\Users\Burak\AppData\Local\AimtecLoader\Data\System\Aimtec.dll</HintPath>
     </Reference>
     <Reference Include="Aimtec.SDK">
-      <HintPath>..\..\..\..\..\AppData\Local\AimtecLoader\Data\System\Aimtec.SDK.dll</HintPath>
+      <HintPath>C:\Users\Burak\AppData\Local\AimtecLoader\Data\System\Aimtec.SDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="Template.cs" />
+    <Compile Include="XinZhao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Drawings.cs" />
     <Compile Include="Utilities\Menus.cs" />
