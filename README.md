@@ -4,8 +4,8 @@ Working assemblies:
 - Sivir
 - Illaoi
 
-Next up:
-- Karma
-
 Planned:
+- Karma
 - Nocturne
+- Xin Zhao
+- Hecarim
