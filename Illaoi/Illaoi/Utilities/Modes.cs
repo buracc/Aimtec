@@ -12,6 +12,9 @@ namespace Illaoi
 {
     internal partial class Illaoi
     {
+        bool pulled;
+        bool hitSpirit;
+
         public void Combo()
         {
             target = GetBestEnemyHeroTargetInRange(1500);
@@ -25,15 +28,15 @@ namespace Illaoi
             bool useW = Menu["w"]["combow"].Enabled;
             bool useE = Menu["e"]["comboe"].Enabled;
             bool useR = Menu["r"]["combor"].Enabled;
-            bool blockQ = Menu["r"]["blockq"].Enabled;
-            bool blockE = Menu["r"]["blocke"].Enabled;
+            bool blockQ = Menu["misc"]["blockq"].Enabled;
+            bool blockE = Menu["misc"]["blocke"].Enabled;
             bool countR = Menu["r"]["rcount"].Enabled;
             bool countSpirit = Menu["r"]["addspirit"].Enabled;
             int minR = Menu["r"]["rcount"].Value;
 
-            bool pulled = false;
-            bool hitSpirit = false;
             
+            hitSpirit = false;
+            pulled = false;
 
             if (target != null)
             {
@@ -62,25 +65,25 @@ namespace Illaoi
 
                 if (R.Ready && useR && !countR && Player.Distance(target) < R.Range)
                 {
-                    CastR(target);
+                    R.Cast();
                 }
 
                 if (R.Ready && useR && countR && Player.Distance(target) < R.Range)
                 {
-                    if (countSpirit)
+                    if (pulled)
                     {
-                        if (pulled)
+                        if (countSpirit)
                         {
-                            if (minR >= Player.CountEnemyHeroesInRange(R.Range) + 1)
+                            if (Player.CountEnemyHeroesInRange(R.Range) +1 >= minR)
                             {
-                                CastR(target);
+                                R.Cast();
                             }
                         } 
                     }
 
-                    if (minR >= Player.CountEnemyHeroesInRange(R.Range))
+                    if (Player.CountEnemyHeroesInRange(R.Range) >= minR)
                     {
-                        CastR(target);
+                        R.Cast();
                     }
                 }
 
@@ -96,26 +99,8 @@ namespace Illaoi
 
                     if (!Player.HasBuff("IllaoiR"))
                     {
-                        CastE(target);
+                        E.Cast(target);
                     }
-                }
-
-                if (W.Ready && useW && Player.Distance(target) < W.Range)
-                {
-                    if (hitSpirit)
-                    {
-                        foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(W.Range))
-                        {
-                            if (spirit.UnitSkinName == target.UnitSkinName)
-                            {
-                                if (Player.Distance(spirit) < W.Range)
-                                {
-                                    CastW(spirit);
-                                }
-                            }
-                        }
-                    }
-                    CastW(target);
                 }
 
                 if (Q.Ready && useQ && Player.Distance(target) < Q.Range)
@@ -138,15 +123,14 @@ namespace Illaoi
                                 {
                                     if (Player.Distance(spirit) < Q.Range)
                                     {
-                                        CastQ(spirit);
+                                        Q.Cast(spirit);
                                     }
                                 }
                             }
                         }
-                        CastQ(target);
+                        Q.Cast(target);
                     }
                 }
-                
             }
         }
 
@@ -162,22 +146,98 @@ namespace Illaoi
             bool useQ = Menu["q"]["harassq"].Enabled;
             bool useW = Menu["w"]["harassw"].Enabled;
             bool useE = Menu["e"]["harasse"].Enabled;
+            bool blockQ = Menu["misc"]["blockq"].Enabled;
+            bool blockE = Menu["misc"]["blocke"].Enabled;
+            
+            hitSpirit = false;
+            pulled = false;
 
             if (target != null)
             {
-                if (Q.Ready && useQ && Player.Distance(target) < Q.Range)
+                foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(Q.Range))
                 {
-                    CastQ(target);
-                }
-
-                if (W.Ready && useW && Player.Distance(target) < W.Range)
-                {
-                    CastW(target);
+                    if (spirit.UnitSkinName == target.UnitSkinName)
+                    {
+                        pulled = true;
+                        switch (Menu["e"]["emode"].Value)
+                        {
+                            case 0:
+                                if (Player.Distance(target) > (Q.Range + W.Range) && Player.Distance(spirit) < Q.Range)
+                                {
+                                    hitSpirit = true;
+                                }
+                                break;
+                            case 1:
+                                hitSpirit = true;
+                                break;
+                            case 2:
+                                hitSpirit = false;
+                                break;
+                        }
+                    }
                 }
 
                 if (E.Ready && useE && Player.Distance(target) < E.Range)
                 {
-                    CastE(target);
+                    if (Player.HasBuff("IllaoiR"))
+                    {
+                        if (blockE)
+                        {
+                            return;
+                        }
+                    }
+
+                    if (!Player.HasBuff("IllaoiR"))
+                    {
+                        E.Cast(target);
+                    }
+                }
+
+                if (W.Ready && useW && Player.Distance(target) < W.Range)
+                {
+                    if (hitSpirit)
+                    {
+                        foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(W.Range))
+                        {
+                            if (spirit.UnitSkinName == target.UnitSkinName)
+                            {
+                                if (Player.Distance(spirit) < W.Range)
+                                {
+                                    W.Cast();
+                                }
+                            }
+                        }
+                    }
+                    W.Cast();
+                }
+
+                if (Q.Ready && useQ && Player.Distance(target) < Q.Range)
+                {
+                    if (Player.HasBuff("IllaoiR"))
+                    {
+                        if (blockQ)
+                        {
+                            return;
+                        }
+                    }
+
+                    if (!Player.HasBuff("IllaoiR"))
+                    {
+                        if (hitSpirit)
+                        {
+                            foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(Q.Range))
+                            {
+                                if (spirit.UnitSkinName == target.UnitSkinName)
+                                {
+                                    if (Player.Distance(spirit) < Q.Range)
+                                    {
+                                        Q.Cast(spirit);
+                                    }
+                                }
+                            }
+                        }
+                        Q.Cast(target);
+                    }
                 }
             }
         }
@@ -193,7 +253,7 @@ namespace Illaoi
                 {
                     if (W.Ready && useW && Player.Distance(minion) < W.Range)
                     {
-                        CastW(minion);
+                        W.Cast();
                     }
                 }
             }
@@ -207,16 +267,35 @@ namespace Illaoi
 
             foreach (var minion in GetEnemyLaneMinionsTargetsInRange(Q.Range))
             {
+
+                if (W.Ready && useW && Player.Distance(target) < W.Range)
+                {
+                    if (hitSpirit)
+                    {
+                        foreach (var spirit in GetEnemyLaneMinionsTargetsInRange(W.Range))
+                        {
+                            if (spirit.UnitSkinName == target.UnitSkinName)
+                            {
+                                if (Player.Distance(spirit) < W.Range)
+                                {
+                                    W.Cast();
+                                }
+                            }
+                        }
+                    }
+                    W.Cast();
+                }
+
                 if (minion != null && spells)
                 {
                     if (W.Ready && useW && Player.Distance(minion) < W.Range)
                     {
-                        CastW(minion);
+                        W.Cast();
                     }
 
                     if (Q.Ready && useQ && Player.Distance(minion) < Q.Range)
                     {
-                        CastQ(minion);
+                        Q.Cast(minion);
                     }
                 }
             }

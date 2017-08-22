@@ -45,15 +45,15 @@ namespace Illaoi
             RMenu = new Menu("r", "R");
             {
                 RMenu.Add(new MenuBool("combor", "Use R in combo"));
-                RMenu.Add(new MenuBool("blockq", "Block Q usage while ulted"));
-                RMenu.Add(new MenuBool("blocke", "Block E usage while ulted"));
                 RMenu.Add(new MenuSliderBool("rcount", "Only R if >= x enemies", true, 3, 1, 5));
-                RMenu.Add(new MenuBool("addspirit", "Include spirit in champ count?"));
+                RMenu.Add(new MenuBool("addspirit", "Include spirit in enemies count?"));
             }
             Menu.Add(RMenu);
 
             MiscMenu = new Menu("misc", "Misc");
             {
+                MiscMenu.Add(new MenuBool("blockq", "Block Q usage while ulted"));
+                MiscMenu.Add(new MenuBool("blocke", "Block E usage while ulted"));
                 MiscMenu.Add(new MenuKeyBind("spells", "Spells farm toggle", KeyCode.M, KeybindType.Toggle));
             }
             Menu.Add(MiscMenu);

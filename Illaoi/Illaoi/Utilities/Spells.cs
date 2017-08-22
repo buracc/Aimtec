@@ -16,8 +16,8 @@ namespace Illaoi
             E = new Spell(SpellSlot.E, 900f);
             R = new Spell(SpellSlot.R, 450f);
 
-            Q.SetSkillshot(0.25f, 90f, 850f, false, SkillshotType.Line);
-            E.SetSkillshot(0.25f, 50f, 900f, true, SkillshotType.Line);
+            Q.SetSkillshot(0.25f, 90f, 850f, false, SkillshotType.Line, false, HitChance.Medium);
+            E.SetSkillshot(0.25f, 50f, 900f, true, SkillshotType.Line, false, HitChance.Medium);
         }
     }
 }
