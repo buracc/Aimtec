@@ -3,7 +3,9 @@ Working assemblies:
 - Karthus
 - Sivir
 
-Work in progress:
+Next up:
 - Illaoi
+
+Future champs:
 - Karma
 - Nocturne
