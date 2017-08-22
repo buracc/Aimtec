@@ -2,10 +2,10 @@
 Working assemblies:
 - Karthus
 - Sivir
-
-Next up:
 - Illaoi
 
-Future champs:
+Planned:
 - Karma
 - Nocturne
+- Xin Zhao
+- Hecarim
