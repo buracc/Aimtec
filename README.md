@@ -13,3 +13,5 @@ Planned:
 - Renekton
 - Galio
 - Shen
+- Malzahar
+- Teemo(?)
