@@ -3,9 +3,9 @@ Working assemblies:
 - Karthus
 - Sivir
 - Illaoi
+- Xin Zhao
 
 Planned:
 - Karma
 - Nocturne
-- Xin Zhao
 - Hecarim
