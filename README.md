@@ -10,3 +10,6 @@ Planned:
 - Karma
 - Nocturne
 - Garen
+- Renekton
+- Galio
+- Shen
