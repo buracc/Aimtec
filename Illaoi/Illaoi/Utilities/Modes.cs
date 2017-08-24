@@ -247,7 +247,7 @@ namespace Illaoi
             }
         }
 
-        private void LastHit()
+        public void LastHit()
         {
             bool useW = Menu["w"]["lastw"].Enabled;
             bool spells = Menu["misc"]["spells"].Enabled;
