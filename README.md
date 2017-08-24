@@ -4,8 +4,14 @@ Working assemblies:
 - Sivir
 - Illaoi
 - Xin Zhao
+- Hecarim
 
 Planned:
 - Karma
 - Nocturne
-- Hecarim
+- Garen
+- Renekton
+- Galio
+- Shen
+- Malzahar
+- Teemo(?)
