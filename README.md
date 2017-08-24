@@ -5,6 +5,7 @@ Working assemblies:
 - Illaoi
 - Xin Zhao
 - Hecarim
+- Malzahar
 
 Planned:
 - Karma
@@ -13,5 +14,4 @@ Planned:
 - Renekton
 - Galio
 - Shen
-- Malzahar
 - Teemo(?)
