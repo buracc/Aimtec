@@ -1,4 +1,7 @@
 # Aimtec
+This is a repository containing AimTec assemblies.
+AimTec is a scripting platform for League of Legends.
+
 Working assemblies:
 - Karthus
 - Sivir
@@ -15,3 +18,6 @@ Planned:
 - Galio
 - Shen
 - Teemo(?)
+
+
+Warning: Assemblies might be outdated as I stopped working on these.
